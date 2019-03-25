@@ -1,10 +1,11 @@
 package com.proyek.rahmanjai.eatit;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -22,14 +23,17 @@ import android.widget.Toast;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.proyek.rahmanjai.eatit.Model.Category;
 import com.proyek.rahmanjai.eatit.Common.Common;
 import com.proyek.rahmanjai.eatit.Interface.ItemClickListener;
-import com.proyek.rahmanjai.eatit.Service.ListenOrder;
+import com.proyek.rahmanjai.eatit.Model.Token;
 import com.proyek.rahmanjai.eatit.ViewHolder.MenuViewHolder;
 import com.squareup.picasso.Picasso;
 
 import io.paperdb.Paper;
+import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class Home extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -43,10 +47,19 @@ public class Home extends AppCompatActivity
     RecyclerView.LayoutManager layoutManager;
 
     FirebaseRecyclerAdapter<Category, MenuViewHolder> adapter;
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
+                .setDefaultFontPath("fonts/cf.ctf")
+                .setFontAttrId(R.attr.fontPath)
+                .build());
         setContentView(R.layout.activity_home);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -86,19 +99,28 @@ public class Home extends AppCompatActivity
         //Load Menu
         recycler_menu = findViewById(R.id.recycle_menu);
         recycler_menu.setHasFixedSize(true);
-        layoutManager = new LinearLayoutManager(this);
-        recycler_menu.setLayoutManager(layoutManager);
+//        layoutManager = new LinearLayoutManager(this);
+//        recycler_menu.setLayoutManager(layoutManager);
+        recycler_menu.setLayoutManager(new GridLayoutManager(this,2));
 
         if (Common.isConnectedToInternet(this)) {
             loadMenu();
         }else {
             Toast.makeText(Home.this, "Please check your internet connection!", Toast.LENGTH_SHORT).show();
+            return;
         }
 
-        //Register Sevice
-        Intent service = new Intent(Home.this, ListenOrder.class);
-        startService(service);
 
+        updateToken(FirebaseInstanceId.getInstance().getToken());
+
+    }
+
+    private void updateToken(String token) {
+
+        FirebaseDatabase db = FirebaseDatabase.getInstance();
+        DatabaseReference tokens = db.getReference("Tokens");
+        Token data = new Token(token,false); // false because this token send from client app
+        tokens.child(Common.currentUser.getPhone()).setValue(data);
     }
 
     private void loadMenu() {

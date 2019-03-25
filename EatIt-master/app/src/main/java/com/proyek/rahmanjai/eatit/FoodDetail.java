@@ -1,5 +1,6 @@
 package com.proyek.rahmanjai.eatit;
 
+import android.content.Context;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -28,6 +29,9 @@ import com.stepstone.apprating.listener.RatingDialogListener;
 
 import java.util.Arrays;
 
+import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
+
 public class FoodDetail extends AppCompatActivity implements RatingDialogListener{
 
     TextView food_name, food_price, food_description;
@@ -47,8 +51,18 @@ public class FoodDetail extends AppCompatActivity implements RatingDialogListene
     Food currentFood;
 
     @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
+                .setDefaultFontPath("fonts/cf.ctf")
+                .setFontAttrId(R.attr.fontPath)
+                .build());
         setContentView(R.layout.activity_food_detail);
 
         //Firbase
@@ -120,6 +134,7 @@ public class FoodDetail extends AppCompatActivity implements RatingDialogListene
                 {
                     Rating item = postSnapshot.getValue(Rating.class);
                     sum += Integer.parseInt(item.getRateValue());
+                    count++;
                 }
                 if(count != 0 )
                 {

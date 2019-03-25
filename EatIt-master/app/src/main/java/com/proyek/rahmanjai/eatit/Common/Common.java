@@ -5,7 +5,8 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
 import com.proyek.rahmanjai.eatit.Model.User;
-
+import com.proyek.rahmanjai.eatit.Remote.APIService;
+import com.proyek.rahmanjai.eatit.Remote.RetrofitClient;
 
 
 public class Common {
@@ -14,6 +15,13 @@ public class Common {
     public static final String PWD_KEY = "Password";
 
     public static User currentUser;
+
+    private static final String BASE_URL = "https://fcm.googleapis.com/";
+
+    public static APIService getFCMService()
+    {
+        return RetrofitClient.getClient(BASE_URL).create(APIService.class);
+    }
 
     public static String convertCodeToStatus(String status) {
         if (status.equals("0"))

@@ -4,32 +4,33 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/my_bg"
+    android:background="@drawable/register"
     tools:context="com.proyek.rahmanjai.eatit.SignUp">
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
-        android:layout_centerInParent="true"
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/linearLayout">
+        android:id="@+id/linearLayout"
+        android:layout_marginTop="357dp">
 
         <com.rengwuxian.materialedittext.MaterialEditText
             android:id="@+id/edtPhone"
             android:hint="Phone number"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColorHint="@android:color/white"
+            android:textColorHint="@android:color/darker_gray"
             android:text="08319681498"
-            android:textColor="@android:color/white"
-            android:textSize="34sp"
+            android:textColor="@android:color/black"
+            android:textSize="20dp"
             android:inputType="phone"
-            app:met_baseColor="@android:color/white"
+            app:met_baseColor="@android:color/black"
             app:met_floatingLabel="highlight"
             app:met_maxCharacters="11"
-            app:met_primaryColor="@android:color/white"
+            app:met_primaryColor="@android:color/black"
             app:met_singleLineEllipsis="true"
             />
 
@@ -40,13 +41,13 @@
             android:layout_height="wrap_content"
             android:textColorHint="@android:color/white"
             android:text="Himanshu Gupta"
-            android:textColor="@android:color/white"
-            android:textSize="34sp"
+            android:textColor="@android:color/black"
+            android:textSize="20dp"
             android:inputType="text"
-            app:met_baseColor="@android:color/white"
+            app:met_baseColor="@android:color/black"
             app:met_floatingLabel="highlight"
             app:met_maxCharacters="11"
-            app:met_primaryColor="@android:color/white"
+            app:met_primaryColor="@android:color/black"
             app:met_singleLineEllipsis="true"
             />
 
@@ -55,23 +56,26 @@
             android:hint="Phone number"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColorHint="@android:color/white"
+            android:textColorHint="@android:color/darker_gray"
             android:text="1234"
-            android:textColor="@android:color/white"
-            android:textSize="34sp"
+            android:textColor="@android:color/black"
+            android:textSize="20dp"
             android:inputType="textPassword"
-            app:met_baseColor="@android:color/white"
+            app:met_baseColor="@android:color/black"
             app:met_floatingLabel="highlight"
             app:met_maxCharacters="11"
-            app:met_primaryColor="@android:color/white"
+            app:met_primaryColor="@android:color/black"
             app:met_singleLineEllipsis="true"
             />
 
     </LinearLayout>
 
     <info.hoang8f.widget.FButton
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="3dp"
         android:id="@+id/btnSignUp"
-        android:layout_width="match_parent"
+        android:layout_width="330dp"
         android:layout_height="wrap_content"
         android:layout_alignStart="@+id/linearLayout"
         android:layout_below="@+id/linearLayout"
@@ -79,9 +83,8 @@
         android:text="Sign Up"
         android:textColor="@android:color/white"
         app:cornerRadius="4dp"
-        app:fButtonColor="@color/btnSignUp"
-        app:shadowColor="@android:color/black"
-        app:shadowEnabled="true"
-        app:shadowHeight="5dp" />
+        app:fButtonColor="#3499FF"
+
+         />
 
 </RelativeLayout>

@@ -32,6 +32,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
@@ -39,7 +40,7 @@ import com.google.firebase.storage.UploadTask;
 import com.proyek.rahmanjai.eatitserver.Common.Common;
 import com.proyek.rahmanjai.eatitserver.Interface.ItemClickListener;
 import com.proyek.rahmanjai.eatitserver.Model.Category;
-import com.proyek.rahmanjai.eatitserver.Service.ListenOrder;
+import com.proyek.rahmanjai.eatitserver.Model.Token;
 import com.proyek.rahmanjai.eatitserver.ViewHolder.MenuViewHolder;
 import com.rengwuxian.materialedittext.MaterialEditText;
 import com.squareup.picasso.Picasso;
@@ -47,7 +48,6 @@ import com.squareup.picasso.Picasso;
 import java.util.UUID;
 
 import info.hoang8f.widget.FButton;
-import retrofit2.http.Query;
 
 public class Home extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -119,9 +119,16 @@ public class Home extends AppCompatActivity
         
         loadMenu();
 
-        // Call Service
-        Intent service = new Intent(Home.this, ListenOrder.class);
-        startService(service);
+    //Send Token
+        updateToken(FirebaseInstanceId.getInstance().getToken());
+
+    }
+
+    private void updateToken(String token) {
+        FirebaseDatabase db = FirebaseDatabase.getInstance();
+        DatabaseReference tokens = db.getReference("Tokens");
+        Token data = new Token(token,true); // false because this token send from client app
+        tokens.child(Common.currentUser.getPhone()).setValue(data);
     }
 
     // Menampilkan Dialog Tambah Kategori

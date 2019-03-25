@@ -1,5 +1,6 @@
 package com.proyek.rahmanjai.eatit;
 
+import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -14,6 +15,9 @@ import com.proyek.rahmanjai.eatit.Interface.ItemClickListener;
 import com.proyek.rahmanjai.eatit.Model.Request;
 import com.proyek.rahmanjai.eatit.ViewHolder.OrderViewHolder;
 
+import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
+
 public class OrderStatus extends AppCompatActivity {
 
     public RecyclerView recyclerView;
@@ -26,8 +30,17 @@ public class OrderStatus extends AppCompatActivity {
     DatabaseReference requests;
 
     @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
+                .setDefaultFontPath("fonts/cf.ctf")
+                .setFontAttrId(R.attr.fontPath)
+                .build());
         setContentView(R.layout.activity_order_status);
 
         //Init Firebase

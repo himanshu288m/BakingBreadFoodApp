@@ -10,6 +10,8 @@ import android.net.NetworkInfo;
 
 import com.proyek.rahmanjai.eatitserver.Model.Request;
 import com.proyek.rahmanjai.eatitserver.Model.User;
+import com.proyek.rahmanjai.eatitserver.Remote.APIService;
+import com.proyek.rahmanjai.eatitserver.Remote.FCMRetrofitClient;
 import com.proyek.rahmanjai.eatitserver.Remote.IGeoCoordinates;
 import com.proyek.rahmanjai.eatitserver.Remote.RetrofitClient;
 
@@ -26,6 +28,8 @@ public class Common {
 
     public static final String baseUrl = "https://maps.googleapis.com";
 
+    public static final String fcmUrl = "https://fcm.googleapis.com/";
+
     public static String convertCodeToStatus(String code){
         if (code.equals("0"))
             return "Placed";
@@ -33,6 +37,10 @@ public class Common {
             return "On My Way";
         else
             return "Shipped";
+    }
+
+    public static APIService getFCMClient() {
+        return FCMRetrofitClient.getClient(fcmUrl).create(APIService.class);
     }
 
     public static IGeoCoordinates getGeoCodeService() {

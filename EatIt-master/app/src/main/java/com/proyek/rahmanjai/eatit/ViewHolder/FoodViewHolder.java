@@ -8,14 +8,12 @@ import android.widget.TextView;
 import com.proyek.rahmanjai.eatit.Interface.ItemClickListener;
 import com.proyek.rahmanjai.eatit.R;
 
-/**
- * Created by rahmanjai on 01/04/2018.
- */
+
 
 public class FoodViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
-    public TextView food_name;
-    public ImageView food_image;
+    public TextView food_name,food_price;
+    public ImageView food_image,fav_image;
 
     private ItemClickListener itemClickListener;
 
@@ -28,6 +26,8 @@ public class FoodViewHolder extends RecyclerView.ViewHolder implements View.OnCl
 
         food_name = itemView.findViewById(R.id.food_name);
         food_image = itemView.findViewById(R.id.food_image);
+        fav_image = itemView.findViewById(R.id.fav);
+        food_price = itemView.findViewById(R.id.food_price);
 
         itemView.setOnClickListener(this);
     }
