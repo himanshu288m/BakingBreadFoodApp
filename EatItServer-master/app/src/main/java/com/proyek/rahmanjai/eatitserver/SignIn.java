@@ -68,6 +68,7 @@ public class SignIn extends AppCompatActivity {
                             //Login Ok
                             Toast.makeText(SignIn.this, "Login Successfully!", Toast.LENGTH_SHORT).show();
                             Intent login = new Intent(SignIn.this, Home.class);
+                            login.putExtra("localPhone",localPhone);
                             Common.currentUser = user;
                             startActivity(login);
                             finish();

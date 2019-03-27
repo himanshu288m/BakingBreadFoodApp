@@ -9,4 +9,6 @@
 
     <color name="overlayBackground">#96979A</color>
     <color name="overlayActionBar">#0e0d0e</color>
+
+    <color name = "transparent">#00000000</color>
 </resources>

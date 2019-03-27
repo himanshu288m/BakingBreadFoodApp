@@ -119,7 +119,7 @@ public class OrderStatus extends AppCompatActivity {
                         startActivity(trackingOrder);
                     }
                 });
-              
+
             }
         };
         adapter.notifyDataSetChanged();

@@ -44,7 +44,7 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <android.support.design.widget.FloatingActionButton
+    <com.andremion.counterfab.CounterFab
         android:id="@+id/btnCart"
         android:src="@drawable/ic_shopping_cart_black_24dp"
         app:backgroundTint="@android:color/white"
