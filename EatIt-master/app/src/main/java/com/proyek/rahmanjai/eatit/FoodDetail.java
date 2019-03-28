@@ -180,7 +180,7 @@ public class FoodDetail extends AppCompatActivity implements RatingDialogListene
                 currentFood = dataSnapshot.getValue(Food.class);
 
                 //Set Image
-                Picasso.get().load(currentFood.getImage())
+                Picasso.with(getBaseContext()).load(currentFood.getImage())
                         .into(food_image);
 
                 collapsingToolbarLayout.setTitle(currentFood.getName());

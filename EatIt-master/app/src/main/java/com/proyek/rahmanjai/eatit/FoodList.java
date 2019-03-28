@@ -167,7 +167,7 @@ public class FoodList extends AppCompatActivity {
             protected void onBindViewHolder(@NonNull FoodViewHolder viewHolder, int position, @NonNull Food model) {
                 viewHolder.food_name.setText(model.getName());
                 Log.d("TAG", ""+adapter.getItemCount());
-                Picasso.get().load(model.getImage())
+                Picasso.with(getBaseContext()).load(model.getImage())
                         .into(viewHolder.food_image);
 
                 final Food local = model;
@@ -228,7 +228,7 @@ public class FoodList extends AppCompatActivity {
                 viewHolder.food_name.setText(model.getName());
                 viewHolder.food_price.setText(String.format("$ %s", model.getPrice().toString()));
                 Log.d("TAG", "" + adapter.getItemCount());
-                Picasso.get().load(model.getImage())
+                Picasso.with(getBaseContext()).load(model.getImage())
                         .into(viewHolder.food_image);
 
                 //Quick Cart

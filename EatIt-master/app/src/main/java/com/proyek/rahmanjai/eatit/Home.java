@@ -162,7 +162,7 @@ public class Home extends AppCompatActivity
 
 
                 viewHolder.txtMenuName.setText(model.getNama());
-                Picasso.get().load(model.getImage())
+                Picasso.with(getBaseContext()).load(model.getImage())
                         .into(viewHolder.imageView);
                 final Category clickItem = model;
                 viewHolder.setItemClickListener(new ItemClickListener() {
