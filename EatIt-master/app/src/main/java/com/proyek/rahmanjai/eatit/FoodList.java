@@ -302,6 +302,6 @@ public class FoodList extends AppCompatActivity {
     protected void onStop() {
         super.onStop();
         adapter.stopListening();
-        searchAdapter.stopListening();
+//        searchAdapter.stopListening();
     }
 }

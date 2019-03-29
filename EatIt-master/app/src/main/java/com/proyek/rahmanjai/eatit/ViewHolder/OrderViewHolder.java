@@ -2,6 +2,7 @@ package com.proyek.rahmanjai.eatit.ViewHolder;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.proyek.rahmanjai.eatit.Interface.ItemClickListener;
@@ -13,6 +14,8 @@ public class OrderViewHolder extends RecyclerView.ViewHolder implements View.OnC
 
     private ItemClickListener itemClickListener;
 
+    public ImageView btn_delete;
+
     public OrderViewHolder(View itemView) {
         super(itemView);
 
@@ -20,7 +23,7 @@ public class OrderViewHolder extends RecyclerView.ViewHolder implements View.OnC
         txtOrderId = itemView.findViewById(R.id.order_id);
         txtOrderStatus = itemView.findViewById(R.id.order_status);
         txtOrderPhone = itemView.findViewById(R.id.order_phone);
-
+        btn_delete = itemView.findViewById(R.id.btn_delete);
         itemView.setOnClickListener(this);
     }
 

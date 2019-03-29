@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
-                .setDefaultFontPath("fonts/cf.ctf")
+                .setDefaultFontPath("fonts/NABILA.ttf")
                 .setFontAttrId(R.attr.fontPath)
                 .build());
         setContentView(R.layout.activity_main);
