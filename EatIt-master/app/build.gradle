@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 28
-       defaultConfig {
+    defaultConfig {
         applicationId "com.proyek.rahmanjai.eatit"
         minSdkVersion 22
         targetSdkVersion 28
@@ -57,13 +57,22 @@ dependencies {
     implementation 'com.github.rey5137:material:1.2.4'
     implementation 'com.android.support:cardview-v7:28.0.0'
     implementation 'com.android.support:recyclerview-v7:28.0.0'
-    implementation 'com.squareup.picasso:picasso:2.5.2'
     implementation 'com.squareup.retrofit2:retrofit:2.5.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.5.0'
     implementation 'com.firebaseui:firebase-ui-database:4.3.2'
     // Front Page CardView
     implementation 'com.codemybrainsout.onboarding:onboarder:1.0.4'
     implementation 'com.stepstone.apprating:app-rating:2.0.0'
+
+    implementation 'com.google.android.gms:play-services-maps:16.1.0'
+    implementation 'com.google.android.libraries.places:places:1.0.0'
+
+    implementation 'com.wang.avi:library:2.1.3'
+    implementation 'org.parceler:parceler-api:1.1.6'
+    annotationProcessor 'org.parceler:parceler:1.1.6'
+    implementation 'com.squareup.picasso:picasso:2.71828'
+
+
 }
 
 

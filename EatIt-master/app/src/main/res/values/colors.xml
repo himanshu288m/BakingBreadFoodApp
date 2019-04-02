@@ -3,9 +3,10 @@
     <color name="colorPrimary">#004d40</color>
     <color name="colorPrimaryDark">#00251a</color>
     <color name="colorAccent">#39796b</color>
-
+    <color name="color_url">#2246e7</color>
     <color name="btnSignUp">#39796b</color>
     <color name="btnSignUpActive">#A9d440</color>
+    <color name="alertColor">#494949</color>
 
     <!--<color name="overlayBackground">#96979A</color>-->
     <!--<color name="overlayActionBar">#0e0d0e</color>-->

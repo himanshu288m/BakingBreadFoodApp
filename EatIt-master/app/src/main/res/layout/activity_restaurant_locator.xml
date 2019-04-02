@@ -1,0 +1,87 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mainFrame"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:elevation="1dp"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme" />
+
+    <FrameLayout
+        android:id="@+id/fader"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:drawable/screen_background_dark_transparent"
+        android:elevation="2dp"
+        android:visibility="invisible">
+
+    </FrameLayout>
+
+    <com.wang.avi.AVLoadingIndicatorView
+        android:id="@+id/avi"
+        style="@style/AVLoadingIndicatorView.Large"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:elevation="3dp"
+        android:visibility="visible"
+        app:indicatorColor="@android:color/holo_blue_dark"
+        app:indicatorName="BallScaleRippleMultipleIndicator" />
+
+    <fragment
+        android:id="@+id/map"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_vertical"
+        android:layout_weight="4">
+
+    </fragment>
+
+    <LinearLayout
+        android:id="@+id/llContent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top"
+        android:orientation="vertical"
+        android:paddingTop="50dp">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#55000000"
+            android:orientation="horizontal"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:weightSum="2">
+
+            <Button
+                android:id="@+id/btnFilter"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/ic_filter"
+                android:textColor="@color/common_google_signin_btn_text_dark_focused"
+                android:textSize="20dp" />
+
+            <Button
+                android:id="@+id/btnDetails"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="250dp"
+                android:layout_weight="1"
+                android:background="@drawable/details_logo"
+                android:textColor="@color/common_google_signin_btn_text_dark_focused"
+                android:textSize="20dp" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</FrameLayout>
