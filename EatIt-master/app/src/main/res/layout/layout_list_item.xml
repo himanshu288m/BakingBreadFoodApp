@@ -20,7 +20,7 @@
         android:layout_marginRight="3dp"
         android:background="@drawable/circular_textview"
         android:gravity="center"
-        android:text="H"
+        android:text="R"
         android:textColor="@android:color/white" />
 
     <LinearLayout
@@ -36,7 +36,7 @@
             android:layout_weight="1"
             android:fontFamily="sans-serif"
             android:padding="5dp"
-            android:text="Hospital Name"
+            android:text="Restaurant Name"
             android:textColor="@color/colorPrimaryDark"
             android:textSize="18sp"
             android:textStyle="bold" />

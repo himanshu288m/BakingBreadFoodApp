@@ -40,7 +40,7 @@
 
                 <TextView
                     android:id="@+id/total"
-                    android:text="$10.000"
+                    android:text="\u20B910.000"
                     android:textSize="24sp"
                     android:textColor="@android:color/white"
                     android:layout_width="wrap_content"

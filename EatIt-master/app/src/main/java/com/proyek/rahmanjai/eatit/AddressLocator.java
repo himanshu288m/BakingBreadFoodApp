@@ -64,7 +64,7 @@ public class AddressLocator extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(AddressLocator.this,RestaurantList.class);
+                Intent intent = new Intent(AddressLocator.this,RestaurantLocation.class);
                 startActivity(intent);
 
             }
