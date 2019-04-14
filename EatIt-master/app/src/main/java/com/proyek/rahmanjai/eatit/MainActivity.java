@@ -116,7 +116,7 @@ public class MainActivity extends AppCompatActivity {
                         user.setPhone(phone); // set Phone
                         if (user.getPassword().equals(pwd)) {
                             Toast.makeText(MainActivity.this, "SignIn Successful !!!", Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(MainActivity.this, Home.class);
+                            Intent intent = new Intent(MainActivity.this, Restaurants.class);
                             Common.currentUser = user;
                             startActivity(intent);
                             finish();

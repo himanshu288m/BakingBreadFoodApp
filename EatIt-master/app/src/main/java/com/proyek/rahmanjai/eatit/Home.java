@@ -76,7 +76,7 @@ public class Home extends AppCompatActivity
 
         //Init Firebase
         database = FirebaseDatabase.getInstance();
-        category = database.getReference("Category");
+        category = database.getReference("Restaurants").child(Common.restaurantSelected).child("detail").child("Category");
 
         Paper.init(this);
 
@@ -132,6 +132,7 @@ public class Home extends AppCompatActivity
 
         if(adapter != null)
             adapter.startListening();
+        recycler_menu.getAdapter().notifyDataSetChanged();
 
     }
 

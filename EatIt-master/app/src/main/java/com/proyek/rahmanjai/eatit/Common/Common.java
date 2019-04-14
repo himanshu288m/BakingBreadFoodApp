@@ -16,6 +16,8 @@ public class Common {
 
     public static User currentUser;
 
+    public static  String restaurantSelected = "" ;
+
     private static final String BASE_URL = "https://fcm.googleapis.com/";
 
     public static APIService getFCMService()

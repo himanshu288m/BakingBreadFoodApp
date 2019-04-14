@@ -19,7 +19,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".RestaurantDetails"></activity>
+        <activity android:name=".Restaurants"></activity>
+        <activity android:name=".RestaurantDetails" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -36,8 +37,9 @@
             android:name=".RestaurantLocation"
             android:label="@string/title_activity_restaurant_locator" />
         <activity android:name=".RestaurantList" />
-        <activity android:name=".AddressLocator"
-            android:theme="@style/AppTheme1"/>
+        <activity
+            android:name=".AddressLocator"
+            android:theme="@style/AppTheme1" />
         <activity android:name=".OnBoardingActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

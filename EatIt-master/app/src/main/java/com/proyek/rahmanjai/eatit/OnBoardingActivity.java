@@ -96,7 +96,7 @@ public  class OnBoardingActivity extends AhoyOnboarderActivity {
 
     public void onFinishButtonPressed() {
 
-        Intent intent = new Intent(OnBoardingActivity.this,AddressLocator.class);
+        Intent intent = new Intent(OnBoardingActivity.this,MainActivity.class);
         startActivity(intent);
 
     }
