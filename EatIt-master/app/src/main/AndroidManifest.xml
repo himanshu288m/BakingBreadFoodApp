@@ -57,7 +57,6 @@
         <activity android:name=".FoodDetail" />
         <activity android:name=".Cart" />
         <activity android:name=".OrderStatus" />
-        <activity android:name=".FrontPage" />
         <activity android:name=".MainActivity" />
 
         <service android:name=".Service.MyFirebaseService">

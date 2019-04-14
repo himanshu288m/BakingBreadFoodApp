@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/my_bg"
+    android:background="@drawable/bg"
     tools:context="com.proyek.rahmanjai.eatitserver.MainActivity">
 
     <LinearLayout
@@ -37,7 +37,15 @@
 
 
     </LinearLayout>
-
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="45dp"
+        android:text="A D M I N"
+        android:textColor="@color/black"
+        android:layout_centerInParent="true"
+        android:layout_marginLeft="80dp"
+        android:textStyle="bold"/>
 
     <LinearLayout
         android:orientation="horizontal"
@@ -70,7 +78,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
-            app:fButtonColor="@color/btnSignUpActive"
+            app:fButtonColor="#FF9897"
             app:shadowColor="@android:color/black"
             app:shadowEnabled="true"
             app:shadowHeight="5dp"

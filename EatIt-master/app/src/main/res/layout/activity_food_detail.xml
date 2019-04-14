@@ -96,7 +96,7 @@
                         android:layout_marginTop="8dp"
                         android:padding="12dp"
                         android:text="Food Name"
-                        android:textColor="@color/colorPrimary"
+                        android:textColor="@color/black"
                         android:textSize="20sp"
                         android:textStyle="bold"
                         android:layout_width="wrap_content"
@@ -117,7 +117,7 @@
                         <TextView
                             android:id="@+id/food_price"
                             android:text="1,000"
-                            android:textColor="@color/colorPrimary"
+                            android:textColor="@color/black"
                             android:textSize="18sp"
                             android:textStyle="bold"
                             android:layout_width="0dp"
@@ -134,7 +134,7 @@
                         android:layout_marginLeft="8dp"
                         android:layout_marginBottom="18dp"
                         app:textSize="8sp"
-                        app:backGroundColor="@color/colorAccent"
+                        app:backGroundColor="@color/black"
                         app:initialNumber="1"
                         app:finalNumber="20"
                         />
