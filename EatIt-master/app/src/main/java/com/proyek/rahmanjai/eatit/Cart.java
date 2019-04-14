@@ -86,7 +86,7 @@ public class Cart extends AppCompatActivity {
 
         //Firebase
         database = FirebaseDatabase.getInstance();
-        requests = database.getReference("Requests");
+        requests = database.getReference("Restaurants").child("Requests");
 
         //init
         recyclerView = findViewById(R.id.listCart);
@@ -136,6 +136,7 @@ public class Cart extends AppCompatActivity {
                         txtTotalPrice.getText().toString(),
                         "0", //status
                         edtComment.getText().toString(),
+                        Common.restaurantSelected,
                         cart
                 );
 

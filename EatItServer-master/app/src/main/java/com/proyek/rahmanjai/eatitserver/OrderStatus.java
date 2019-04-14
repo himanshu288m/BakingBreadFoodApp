@@ -55,7 +55,7 @@ public class OrderStatus extends AppCompatActivity {
 
         //Init Firebase
         db = FirebaseDatabase.getInstance();
-        requests = db.getReference("Requests");
+        requests = db.getReference("Restaurants").child(Common.currentUser.getRestaurantId()).child("Requests");
 
         //Init Service
         mService = Common.getFCMClient();

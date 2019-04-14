@@ -11,19 +11,23 @@ public class Request {
     private String total;
     private String status;
     private String comment;
+    private String restaurantId;
     private List<Order> foods; // list of food order
+
 
     public Request() {
 
     }
 
-    public Request(String phone, String name, String address, String total, String status, String comment, List<Order> foods) {
+    public Request(String phone, String name, String address, String total, String status, String comment, String restaurantId, List<Order> foods) {
+
         this.phone = phone;
         this.name = name;
         this.address = address;
         this.total = total;
         this.status = status;
         this.comment = comment;
+        this.restaurantId = restaurantId;
         this.foods = foods;
     }
 
@@ -73,6 +77,14 @@ public class Request {
 
     public void setComment(String comment) {
         this.comment = comment;
+    }
+
+    public String getRestaurantId() {
+        return restaurantId;
+    }
+
+    public void setRestaurantId(String restaurantId) {
+        this.restaurantId = restaurantId;
     }
 
     public List<Order> getFoods() {
