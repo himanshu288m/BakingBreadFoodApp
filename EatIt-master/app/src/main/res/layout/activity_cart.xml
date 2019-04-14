@@ -16,7 +16,7 @@
 
     <android.support.v7.widget.CardView
         android:layout_alignParentBottom="true"
-        app:cardBackgroundColor="@color/colorPrimary"
+        app:cardBackgroundColor="@color/black"
         android:layout_width="match_parent"
         android:layout_height="100dp">
 
@@ -51,7 +51,7 @@
             <info.hoang8f.widget.FButton
                 android:id="@+id/btnPlaceOrder"
                 android:text="Place Order"
-                android:textColor="@android:color/white"
+                android:textColor="@android:color/black"
                 android:layout_marginRight="8dp"
                 android:layout_marginLeft="8dp"
                 android:layout_alignParentBottom="true"
@@ -60,7 +60,7 @@
                 android:layout_margin="8dp"
                 android:layout_weight="1"
                 app:cornerRadius="4dp"
-                app:fButtonColor="@color/btnSignUpActive"
+                app:fButtonColor="@color/white"
                 app:shadowColor="@android:color/black"
                 app:shadowEnabled="true"
                 app:shadowHeight="5dp" />

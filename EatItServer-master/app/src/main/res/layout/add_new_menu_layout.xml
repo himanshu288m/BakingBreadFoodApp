@@ -47,7 +47,7 @@
                 android:layout_weight="1"
                 android:textColor="@android:color/white"
                 app:cornerRadius="4dp"
-                app:fButtonColor="@color/colorPrimary"
+                app:fButtonColor="@color/black"
                 app:shadowColor="@android:color/black"
                 app:shadowEnabled="true"
                 app:shadowHeight="5dp" />
@@ -62,9 +62,9 @@
                 android:layout_alignStart="@+id/linearLayout2"
                 android:layout_below="@+id/linearLayout2"
                 android:layout_weight="1"
-                android:textColor="@android:color/white"
+                android:textColor="@android:color/black"
                 app:cornerRadius="4dp"
-                app:fButtonColor="@color/colorPrimaryDark"
+                app:fButtonColor="@color/white"
                 app:shadowColor="@android:color/black"
                 app:shadowEnabled="true"
                 app:shadowHeight="5dp" />
