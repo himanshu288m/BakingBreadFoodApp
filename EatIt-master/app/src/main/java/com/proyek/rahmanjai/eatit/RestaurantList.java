@@ -49,8 +49,7 @@ public class RestaurantList extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("Details");
         setSupportActionBar(toolbar);
-        loginPage = findViewById(R.id.loginPage);
-        locateMap = findViewById(R.id.locateMap);
+
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         recyclerHospital = (RecyclerView) findViewById(R.id.recyclerHospital);
@@ -65,22 +64,9 @@ public class RestaurantList extends AppCompatActivity {
         stopLoadingAnimation();
         tvDisplayResult.setVisibility(View.INVISIBLE);
 
-        loginPage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(RestaurantList.this,MainActivity.class);
-                startActivity(intent);
-            }
-        });
 
-        locateMap.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-                Intent intent = new Intent(RestaurantList.this,RestaurantLocation.class);
-                startActivity(intent);
-            }
-        });
+
 
         Intent intent = getIntent();
         if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
