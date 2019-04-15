@@ -35,8 +35,21 @@
 
         <activity
             android:name=".RestaurantLocation"
-            android:label="@string/title_activity_restaurant_locator" />
-        <activity android:name=".RestaurantList" />
+            android:label="@string/title_activity_restaurant_locator" >
+            <meta-data
+                android:name="android.app.default_searchable"
+                android:value=".RestaurantList" />
+        </activity>
+        <activity android:name=".RestaurantList" >
+
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.app.searchable"
+                android:resource="@xml/searchable" />
+        </activity>
         <activity
             android:name=".AddressLocator"
             android:theme="@style/AppTheme1" />

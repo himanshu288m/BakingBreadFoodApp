@@ -376,6 +376,7 @@ public class RestaurantLocator extends FragmentActivity implements OnMapReadyCal
                     }
                 } else {
                     Toast.makeText(ctx, "Unable to fetch data from the server. Please try again later", Toast.LENGTH_SHORT).show();
+
                 }
             }
 

@@ -27,18 +27,20 @@ import android.widget.SearchView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.google.android.gms.maps.CameraUpdateFactory;
+
 import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
-import com.google.android.gms.maps.model.MarkerOptions;
+
+import com.proyek.rahmanjai.eatit.FoodList;
 import com.proyek.rahmanjai.eatit.Model.DistanceDuration;
 import com.proyek.rahmanjai.eatit.Model.DistanceResult;
+import com.proyek.rahmanjai.eatit.Model.Food;
 import com.proyek.rahmanjai.eatit.Model.PlaceList;
 import com.proyek.rahmanjai.eatit.Model.SinglePlace;
+import com.proyek.rahmanjai.eatit.R;
+import com.proyek.rahmanjai.eatit.RestaurantList;
 import com.proyek.rahmanjai.eatit.rest_api.GooglePlacesApi;
 import com.proyek.rahmanjai.eatit.rest_api.RestaurantListClient;
 import com.proyek.rahmanjai.eatit.utils.LoadingUtil;
@@ -53,7 +55,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class RestaurantLocation extends AppCompatActivity implements OnMapReadyCallback {
+public class RestaurantLocation extends AppCompatActivity  {
 
     public static final String TAG = "HL";
     static LatLng defLocation = new LatLng(28.5, 77); //Delhi
@@ -74,28 +76,33 @@ public class RestaurantLocation extends AppCompatActivity implements OnMapReadyC
     PlaceList placeList;
     DistanceResult distanceResult;
     FrameLayout mainFrame;
-    Button btnFilter, btnDetails;
+    Button orderFood, nearbyrestaurant,btnFilter;
     Spinner spinnerType, spinnerRank;
     private GoogleMap mMap;
 
     @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_restaurant_locator);
+        setContentView(R.layout.welcome);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar2);
-        toolbar.setTitle("Restaurant Locator");
+        toolbar.setTitle("Search For  Restaurants Here");
         setSupportActionBar(toolbar);
 
-        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.map);
-        mapFragment.getMapAsync(this);
+
 
         fader = (FrameLayout) findViewById(R.id.fader);
         avi = (AVLoadingIndicatorView) findViewById(R.id.avi);
 
-        btnFilter = (Button) findViewById(R.id.btnFilter);
-        btnDetails = (Button) findViewById(R.id.btnDetails);
+        nearbyrestaurant = findViewById(R.id.nerbyseachbtn);
+        orderFood = findViewById(R.id.OrderFood);
+        btnFilter = findViewById(R.id.filterSearch);
+
         mainFrame = (FrameLayout) findViewById(R.id.mainFrame);
 
         setLoadingAnimation();
@@ -104,13 +111,22 @@ public class RestaurantLocation extends AppCompatActivity implements OnMapReadyC
         googlePlacesApi = new GooglePlacesApi(ctx);
         restaurantListClient = googlePlacesApi.getrestaurantlistclient();
 
-        btnDetails.setOnClickListener(new View.OnClickListener() {
+        nearbyrestaurant.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 showDetailList();
             }
         });
 
+
+        orderFood.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(RestaurantLocation.this, FoodList.class);
+                startActivity(intent);
+
+            }
+        });
         btnFilter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -169,9 +185,9 @@ public class RestaurantLocation extends AppCompatActivity implements OnMapReadyC
                     Log.d(TAG, "onLocationChanged: lat: " + curLocation.latitude);
                     Log.d(TAG, "onLocationChanged: long: " + curLocation.longitude);
                     Log.d(TAG, "onLocationChanged: accuracy: " + location.getAccuracy());
-                    mapAccuracy = location.getAccuracy();
-                    if (mMap != null)
-                        initMapPointer(curLocation);
+//                    mapAccuracy = location.getAccuracy();
+//                    if (mMap != null)
+//                        initMapPointer(curLocation);
                 }
 
                 @Override
@@ -206,6 +222,7 @@ public class RestaurantLocation extends AppCompatActivity implements OnMapReadyC
             );
 
         }
+        initMapPointer(curLocation);
 
     }
 
@@ -228,48 +245,48 @@ public class RestaurantLocation extends AppCompatActivity implements OnMapReadyC
     }
 
 
-    @Override
-    public void onMapReady(GoogleMap googleMap) {
-        mMap = googleMap;
-        if (mMap == null)
-            Log.d(TAG, "onMapReady: map is null");
-
-        Log.d(TAG, "onMapReady: Map is ready");
-
-        //locMan.removeUpdates(locLis);
-        initMapPointer(curLocation);
-    }
+//    @Override
+//    public void onMapReady(GoogleMap googleMap) {
+//        mMap = googleMap;
+//        if (mMap == null)
+//            Log.d(TAG, "onMapReady: map is null");
+//
+//        Log.d(TAG, "onMapReady: Map is ready");
+//
+//        //locMan.removeUpdates(locLis);
+//        initMapPointer(curLocation);
+//    }
 
     void initMapPointer(LatLng loc) {
 
-        initCurrentPointer(loc);
+//        initCurrentPointer(loc);
 //        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(loc,13));
 
-        if (mapAccuracy != 10000) {
-            if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                return;
-            }
-            locMan.removeUpdates(locLis);
-            getHospitalLocation(curLocation);
-            Log.d(TAG, "initMapPointer: Map location is correct");
-        }
+//        if (mapAccuracy != 10000) {
+//            if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+//                return;
+//            }
+//            locMan.removeUpdates(locLis);
+        getHospitalLocation(curLocation);
+        Log.d(TAG, "initMapPointer: Map location is correct");
     }
 
-    void initCurrentPointer(LatLng loc) {
-        mMap.clear();
 
-        curmarker = mMap.addMarker(new MarkerOptions().position(loc).title("Current Location")
-                .snippet("(" + loc.latitude + "," + loc.longitude + ")")
-                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
-    }
+//    void initCurrentPointer(LatLng loc) {
+//        mMap.clear();
+//
+//        curmarker = mMap.addMarker(new MarkerOptions().position(loc).title("Current Location")
+//                .snippet("(" + loc.latitude + "," + loc.longitude + ")")
+//                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
+//    }
 
-    void addMapMarker(LatLng loc, String name, String vicinity) {
-        mMap.addMarker(new MarkerOptions().position(loc).title(name)
-                .snippet(vicinity).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_CYAN)
-                ));
-
-//        Log.d(TAG, "addMapMarker: marker "+loc);
-    }
+//    void addMapMarker(LatLng loc, String name, String vicinity) {
+//        mMap.addMarker(new MarkerOptions().position(loc).title(name)
+//                .snippet(vicinity).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_CYAN)
+//                ));
+//
+////        Log.d(TAG, "addMapMarker: marker "+loc);
+//    }
 
     void getHospitalLocation(LatLng loc) {
 //        HashMap<String,String> params = new HashMap<>();
@@ -293,13 +310,14 @@ public class RestaurantLocation extends AppCompatActivity implements OnMapReadyC
 
 
                 if (placeList != null) {
+
                     int s = placeList.places.size();
 //                    int len = s>10 ? s : s;    //Limiting to a maximum of 10 right now
                     for (int i = 1; i < s; i++) {
                         SinglePlace place = placeList.places.get(i);
                         Log.d(TAG, "hospital 1" + place.getName());
 
-                        addMapMarker(place.getLoc(), place.getName(), place.getVicinity());
+//                        addMapMarker(place.getLoc(), place.getName(), place.getVicinity());
                     }
 
                     getDistance();
@@ -309,10 +327,10 @@ public class RestaurantLocation extends AppCompatActivity implements OnMapReadyC
                 }
 
 //                addMapMarker(new LatLng(28.6566,77.18432),"Test loc","testing");
-                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(curLocation, 14));
+//                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(curLocation, 14));
 
-                mapReady = true;
-                curmarker.showInfoWindow();
+//                mapReady = true;
+//                curmarker.showInfoWindow();
                 stopLoadingAnimation();
                 Log.d(TAG, "onResponse: Fininshed adding location pointers");
             }
@@ -329,6 +347,7 @@ public class RestaurantLocation extends AppCompatActivity implements OnMapReadyC
         Intent i = new Intent(this, RestaurantList.class);
         i.putExtra("itemList", Parcels.wrap(placeList.places));
         startActivity(i);
+
     }
 
     void getDistance() {
@@ -428,7 +447,7 @@ public class RestaurantLocation extends AppCompatActivity implements OnMapReadyC
 
                     mapReady = false;
                     setLoadingAnimation();
-                    initCurrentPointer(curLocation);
+//                    initCurrentPointer(curLocation);
                     getHospitalLocation(curLocation);
                 }
             }
