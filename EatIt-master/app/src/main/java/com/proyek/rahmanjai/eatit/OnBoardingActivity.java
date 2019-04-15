@@ -79,6 +79,7 @@ public  class OnBoardingActivity extends AhoyOnboarderActivity {
 
         setFinishButtonTitle("Get Started");
 
+
         showNavigationControls(true);
 
         //setGradientBackground();
