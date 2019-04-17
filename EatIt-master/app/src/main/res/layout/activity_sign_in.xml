@@ -81,24 +81,7 @@
 
 
          />
-    <info.hoang8f.widget.FButton
-        android:layout_marginLeft="180dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="20dp"
-        android:id="@+id/btnforgot"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/linearLayout2"
-        android:layout_below="@+id/btnSignIn"
-        android:layout_weight="1"
-        android:text="Forgot Password"
-        android:textSize="15dp"
-        android:textColor="@android:color/white"
-        app:cornerRadius="4dp"
-        app:fButtonColor="@color/btnSignUpActive"
 
-
-        />
 
 
 </RelativeLayout>

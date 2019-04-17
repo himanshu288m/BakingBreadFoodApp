@@ -17,6 +17,8 @@ import com.google.firebase.database.ValueEventListener;
 import com.proyek.rahmanjai.eatitserver.Common.Common;
 import com.proyek.rahmanjai.eatitserver.Model.User;
 
+import io.paperdb.Paper;
+
 public class SignIn extends AppCompatActivity {
 
     EditText edtPhone, edtPassword;
@@ -34,6 +36,8 @@ public class SignIn extends AppCompatActivity {
         edtPhone = findViewById(R.id.edtPhone);
         btnSignIn = findViewById(R.id.btnSignIn);
 
+
+
         // Init Firebase
         db = FirebaseDatabase.getInstance();
         users = db.getReference("user");
@@ -41,6 +45,9 @@ public class SignIn extends AppCompatActivity {
         btnSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+
+
                 signInUser(edtPhone.getText().toString(), edtPassword.getText().toString());
             }
         });

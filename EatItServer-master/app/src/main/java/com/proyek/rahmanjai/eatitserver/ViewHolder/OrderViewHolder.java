@@ -11,7 +11,7 @@ import com.proyek.rahmanjai.eatitserver.R;
 
 public class OrderViewHolder extends RecyclerView.ViewHolder {
 
-    public TextView txtOrderId, txtOrderStatus, txtOrderPhone, txtOrderAddres;
+    public TextView txtOrderId, txtOrderStatus, txtOrderPhone, txtOrderAddres,txtOrderSelf;
 
     public Button btnEdit,btnRemove , btnDetail,btnDirection;
 
@@ -23,6 +23,7 @@ public class OrderViewHolder extends RecyclerView.ViewHolder {
         txtOrderId = itemView.findViewById(R.id.order_id);
         txtOrderStatus = itemView.findViewById(R.id.order_status);
         txtOrderPhone = itemView.findViewById(R.id.order_phone);
+        txtOrderSelf = itemView.findViewById(R.id.order_self);
 
         btnEdit = itemView.findViewById(R.id.btnEdit);
         btnRemove = itemView.findViewById(R.id.btnRemove);

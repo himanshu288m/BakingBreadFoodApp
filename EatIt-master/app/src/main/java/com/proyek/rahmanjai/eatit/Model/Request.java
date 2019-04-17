@@ -12,11 +12,17 @@ public class Request {
     private String status;
     private String comment;
     private String restaurantId;
+    private String selfPickup ;
     private List<Order> foods; // list of food order
 
 
     public Request() {
 
+    }
+
+
+    public Request(String selfPickup) {
+        this.selfPickup = selfPickup;
     }
 
     public Request(String phone, String name, String address, String total, String status, String comment, String restaurantId, List<Order> foods) {
@@ -85,6 +91,14 @@ public class Request {
 
     public void setRestaurantId(String restaurantId) {
         this.restaurantId = restaurantId;
+    }
+
+    public String getSelfPickup() {
+        return selfPickup;
+    }
+
+    public void setSelfPickup(String selfPickup) {
+        this.selfPickup = selfPickup;
     }
 
     public List<Order> getFoods() {

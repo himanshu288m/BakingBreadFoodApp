@@ -1,16 +1,26 @@
 package com.proyek.rahmanjai.eatitserver;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
+import android.provider.MediaStore;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 import com.proyek.rahmanjai.eatitserver.Common.Common;
 
 import com.google.firebase.database.DataSnapshot;
@@ -18,21 +28,27 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.proyek.rahmanjai.eatitserver.Model.Category;
 import com.proyek.rahmanjai.eatitserver.Model.User;
 import com.rengwuxian.materialedittext.MaterialEditText;
+
+import java.io.IOException;
+import java.util.UUID;
 
 public class SignUp extends AppCompatActivity {
 
     MaterialEditText edtPhone, edtName, edtPassword,edtRestaurantName;
-    Button btnSignUp,btnSelect;
+    Button btnSignUp,btnSelect , btnnupload;
 
 
     FirebaseStorage storage;
     StorageReference storageReference;
 
-    Uri saveUri;
+    private Uri filePath;
 
     String ImageUrl ;
+    private final int PICK_IMAGE_REQUEST = 71;
+    ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +64,7 @@ public class SignUp extends AppCompatActivity {
         edtRestaurantName = findViewById(R.id.edtRestaurantName);
         btnSignUp = findViewById(R.id.btnSignUp);
         btnSelect = findViewById(R.id.btnSelect);
-
+        btnnupload = findViewById(R.id.btnnupload);
         // Init Firebase
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
         final DatabaseReference table_user = database.getReference("user");
@@ -60,6 +76,9 @@ public class SignUp extends AppCompatActivity {
 
 
                 if (Common.isConnectedToInternet(getBaseContext())) {
+
+
+
                     final ProgressDialog mDialog = new ProgressDialog(SignUp.this);
                     mDialog.setMessage("\n" +
                             "Please wait...");
@@ -94,7 +113,7 @@ public class SignUp extends AppCompatActivity {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                            User user = new User(edtName.getText().toString(),edtPhone.getText().toString(),edtRestaurantName.getText().toString(),"https://firebasestorage.googleapis.com/v0/b/fastfooddelivery-fc7f3.appspot.com/o/images%2FRestaurant.jpeg?alt=media&token=2d5c5a2c-6fab-4fda-aa9e-0d4927758b6f");
+                            User user = new User(edtName.getText().toString(),edtPhone.getText().toString(),edtRestaurantName.getText().toString(),ImageUrl);
                             database.getReference("Restaurants").child(edtPhone.getText().toString()).setValue(user);
                             Toast.makeText(SignUp.this, "Signup Successful !!", Toast.LENGTH_SHORT);
                             finish();
@@ -114,9 +133,77 @@ public class SignUp extends AppCompatActivity {
         btnSelect.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+            chooseImage();
 
             }
         });
 
+
+btnnupload.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View view) {
+        uploadImage();
+    }
+});
+    }
+
+
+    private void chooseImage() {
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK
+                && data != null && data.getData() != null )
+        {
+            filePath = data.getData();
+
+        }
+    }
+
+
+
+
+    private void uploadImage() {
+
+        if(filePath != null)
+        {
+            final ProgressDialog progressDialog = new ProgressDialog(this);
+            progressDialog.setTitle("Uploading...");
+            progressDialog.show();
+
+            StorageReference ref = storageReference.child("images/"+ UUID.randomUUID().toString());
+            ref.putFile(filePath)
+                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                            progressDialog.dismiss();
+                            Uri downloadUrl = taskSnapshot.getDownloadUrl();
+                            ImageUrl = downloadUrl.toString();
+                            Toast.makeText(SignUp.this, "Uploaded", Toast.LENGTH_SHORT).show();
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            progressDialog.dismiss();
+                            Toast.makeText(SignUp.this, "Failed "+e.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    })
+                    .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
+                            double progress = (100.0*taskSnapshot.getBytesTransferred()/taskSnapshot
+                                    .getTotalByteCount());
+                            progressDialog.setMessage("Uploaded "+(int)progress+"%");
+                        }
+                    });
+        }
     }
 }
+

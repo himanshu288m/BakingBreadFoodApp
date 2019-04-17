@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Payment"
+    >
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="P A Y M E N T"
+        android:textSize="34dp"
+        android:textStyle="bold"
+        android:layout_marginLeft="90dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Amount:"
+        android:textSize="24dp"
+        android:layout_marginTop="100dp"
+        />
+    <TextView
+        android:id="@+id/txtAmount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Rs 00/-:"
+        android:textSize="24dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginLeft="110dp"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Address:"
+        android:textSize="24dp"
+        android:layout_marginTop="140dp"
+        />
+
+    <TextView
+        android:id="@+id/txtAddress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Address"
+        android:textSize="24dp"
+        android:layout_marginTop="140dp"
+        android:layout_marginLeft="110dp"
+        />
+    <com.rey.material.widget.CheckBox
+        android:id="@+id/ckbPickup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="200dp"
+        android:text=" Self PickUp"
+        android:textSize="24dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Pay Online"
+        android:textSize="28dp"
+        android:layout_marginTop="280dp"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Card Number"
+        android:textSize="24dp"
+        android:layout_marginTop="340dp"/>
+    <EditText
+        android:id="@+id/edtCard"
+        android:layout_width="230dp"
+        android:inputType="number"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="340dp"
+        android:layout_marginLeft="160dp"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Password"
+        android:textSize="24dp"
+        android:layout_marginTop="400dp"/>
+    <EditText
+        android:id="@+id/edtPwd"
+        android:inputType="numberPassword"
+        android:layout_width="230dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="400dp"
+        android:layout_marginLeft="160dp"/>
+
+    <com.rey.material.widget.CheckBox
+        android:id="@+id/ckbCod"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="480dp"
+        android:text=" C A S H  O N  D E L I V E R Y"
+        android:textSize="24dp"/>
+
+    <Button
+        android:id="@+id/btnPay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop ="550dp"
+        android:background="@color/black"
+        android:text="P A Y"
+        android:textSize="20dp"
+        android:textColor="@color/white"
+        android:layout_marginLeft="90dp"/>
+
+    <Button
+        android:id="@+id/btnCancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop ="550dp"
+        android:background="@color/white"
+        android:text="C A N C E L"
+        android:textSize="20dp"
+        android:textColor="@color/black"
+        android:layout_marginLeft="200dp"/>
+
+</RelativeLayout>

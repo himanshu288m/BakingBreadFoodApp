@@ -122,7 +122,7 @@ public class RestaurantLocation extends AppCompatActivity  {
         orderFood.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(RestaurantLocation.this, FoodList.class);
+                Intent intent = new Intent(RestaurantLocation.this, Restaurants.class);
                 startActivity(intent);
 
             }

@@ -9,6 +9,7 @@ public class Request {
     private String total;
     private String status;
     private String comment;
+    private String SelfPickup;
     private List<Order> foods; // list of food order
 
     public Request() {
@@ -79,5 +80,13 @@ public class Request {
 
     public void setFoods(List<Order> foods) {
         this.foods = foods;
+    }
+
+    public String getSelfPickup() {
+        return SelfPickup;
+    }
+
+    public void setSelfPickup(String selfPickup) {
+        SelfPickup = selfPickup;
     }
 }

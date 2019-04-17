@@ -3,6 +3,7 @@ package com.proyek.rahmanjai.eatit;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -86,7 +87,7 @@ public class Cart extends AppCompatActivity {
 
         //Firebase
         database = FirebaseDatabase.getInstance();
-        requests = database.getReference("Restaurants").child("Requests");
+        requests = database.getReference("Restaurants").child(Common.restaurantSelected).child("Requests");
 
         //init
         recyclerView = findViewById(R.id.listCart);
@@ -125,6 +126,8 @@ public class Cart extends AppCompatActivity {
         alertDialog.setView(order_address_comment);
         alertDialog.setIcon(R.drawable.ic_shopping_cart_black_24dp);
 
+
+
         alertDialog.setPositiveButton("YES", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -149,7 +152,12 @@ public class Cart extends AppCompatActivity {
                 new Database(getBaseContext()).cleanCart();
 
                 sendNotififcationOrder(order_number);
-//                Toast.makeText(Cart.this, "Thank you for ordering!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(Cart.this, "Thank you for ordering!", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(Cart.this,Payment.class);
+                intent.putExtra("CartAmount",txtTotalPrice.getText().toString());
+                intent.putExtra("Address",edtAddress.getText().toString());
+                intent.putExtra("order_number",order_number);
+                startActivity(intent);
 //                finish();
             }
         });

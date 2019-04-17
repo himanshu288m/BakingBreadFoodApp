@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
@@ -20,6 +21,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.StorageReference;
 import com.jaredrummler.materialspinner.MaterialSpinner;
 import com.proyek.rahmanjai.eatitserver.Common.Common;
 import com.proyek.rahmanjai.eatitserver.Interface.ItemClickListener;
@@ -45,6 +47,8 @@ public class OrderStatus extends AppCompatActivity {
     APIService mService;
     FirebaseRecyclerAdapter<Request,OrderViewHolder> adapter;
 
+
+
     FirebaseDatabase db;
     DatabaseReference requests;
 
@@ -67,7 +71,7 @@ public class OrderStatus extends AppCompatActivity {
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
-        loadOrders(); // Memuat semua orderan
+        loadOrders();
     }
 
     private void loadOrders() {
@@ -76,13 +80,18 @@ public class OrderStatus extends AppCompatActivity {
                 R.layout.order_layout,
                 OrderViewHolder.class,
                 requests
-        ) {
+        )
+
+        {
             @Override
             protected void populateViewHolder(OrderViewHolder viewHolder, final Request model, final int position) {
                 viewHolder.txtOrderId.setText(adapter.getRef(position).getKey());
                 viewHolder.txtOrderStatus.setText(Common.convertCodeToStatus(model.getStatus()));
                 viewHolder.txtOrderAddres.setText(model.getAddress());
                 viewHolder.txtOrderPhone.setText(model.getPhone());
+                viewHolder.txtOrderSelf.setText(model.getSelfPickup());
+
+
 
                 //Now event button
 
@@ -122,6 +131,7 @@ public class OrderStatus extends AppCompatActivity {
 
             }
         };
+
         adapter.notifyDataSetChanged();
         recyclerView.setAdapter(adapter);
     }

@@ -317,6 +317,12 @@ public class Home extends AppCompatActivity
         if (id == R.id.nav_order){
             Intent order = new Intent(Home.this,OrderStatus.class);
             startActivity(order);
+        }else if (id == R.id.nav_signout) {
+
+            //Logout
+            Intent signIn = new Intent(Home.this, SignIn.class);
+            signIn.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(signIn);
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);

@@ -15,6 +15,7 @@ public class User {
         Nama = nama;
         Password = password;
         IsStaff = "false";
+
     }
 
     public String getIsStaff() {
