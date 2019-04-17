@@ -71,6 +71,7 @@
         <activity android:name=".Cart" />
         <activity android:name=".OrderStatus" />
         <activity android:name=".MainActivity" />
+        <activity android:name=".RestaurantLocator" />
 
         <service android:name=".Service.MyFirebaseService">
             <intent-filter>

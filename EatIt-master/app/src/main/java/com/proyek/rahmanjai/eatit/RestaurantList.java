@@ -54,7 +54,7 @@ public class RestaurantList extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         recyclerHospital = (RecyclerView) findViewById(R.id.recyclerHospital);
-        recyclerHospital.setLayoutManager(new GridLayoutManager(this,2));
+        recyclerHospital.setLayoutManager(new LinearLayoutManager(this));
 
         fader = (FrameLayout) findViewById(R.id.fader);
         listFrame = (FrameLayout) findViewById(R.id.content_main);
