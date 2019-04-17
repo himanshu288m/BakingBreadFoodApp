@@ -82,8 +82,8 @@ public class Payment extends AppCompatActivity {
 
 
 
-                if(edtcard.getText().toString().length()<=0 && edtcard.getText().toString().length()>14 && edtPwd.getText().toString().length()<=0){
-                    edtcard.setError("Invalid Card Number(14 Digit Card No.)");
+                if(edtcard.getText().toString().length()<=0  || edtPwd.getText().toString().length()<=0){
+                    edtcard.setError("Invalid Card Number or Password");
                 }
                 else {
 
@@ -120,6 +120,9 @@ public class Payment extends AppCompatActivity {
                        @Override
                        public void onClick(DialogInterface dialog, int which) {
                            dialog.dismiss();
+                           Intent Cancel = new Intent(Payment.this, Home.class);
+                           Cancel.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                           startActivity(Cancel);
 
                        }
                    });
