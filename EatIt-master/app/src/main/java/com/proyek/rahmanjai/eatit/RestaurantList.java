@@ -4,6 +4,7 @@ import android.app.SearchManager;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -53,7 +54,7 @@ public class RestaurantList extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         recyclerHospital = (RecyclerView) findViewById(R.id.recyclerHospital);
-        recyclerHospital.setLayoutManager(new LinearLayoutManager(this));
+        recyclerHospital.setLayoutManager(new GridLayoutManager(this,2));
 
         fader = (FrameLayout) findViewById(R.id.fader);
         listFrame = (FrameLayout) findViewById(R.id.content_main);

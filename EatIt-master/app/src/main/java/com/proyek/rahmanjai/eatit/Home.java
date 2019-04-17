@@ -111,7 +111,7 @@ public class Home extends AppCompatActivity
         recycler_menu.setHasFixedSize(true);
 //        layoutManager = new LinearLayoutManager(this);
 //        recycler_menu.setLayoutManager(layoutManager);
-        recycler_menu.setLayoutManager(new GridLayoutManager(this,2));
+        recycler_menu.setLayoutManager(new LinearLayoutManager(this));
 
         if (Common.isConnectedToInternet(this)) {
             loadMenu();
