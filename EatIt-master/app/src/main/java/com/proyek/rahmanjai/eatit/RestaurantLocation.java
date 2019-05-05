@@ -299,48 +299,57 @@ public class RestaurantLocation extends AppCompatActivity  {
 //        params.put("key=", GooglePlacesApi.WEB_KEY);
 
 
-        HashMap<String, String> params = googlePlacesApi.getQueryParams(loc, locationType, locationRankby);
+        HashMap<String, String> params = null;
+        try {
+            params = googlePlacesApi.getQueryParams(loc, locationType, locationRankby);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
-        restaurantListClient.getNearbyRestaurant(params).enqueue(new Callback<PlaceList>() {
-            @Override
-            public void onResponse(Call<PlaceList> call, Response<PlaceList> response) {
-                Log.d(TAG, "onResponse: Response recieved" + response.body());
-                placeList = response.body();
-                Log.d(TAG, "check" + placeList.places.size());
+        try {
+            restaurantListClient.getNearbyRestaurant(params).enqueue(new Callback<PlaceList>() {
+                @Override
+                public void onResponse(Call<PlaceList> call, Response<PlaceList> response) {
+                    Log.d(TAG, "onResponse: Response recieved" + response.body());
+                    placeList = response.body();
+                    Log.d(TAG, "check" + placeList.places.size());
 
 
-                if (placeList != null) {
+                    if (placeList != null) {
 
-                    int s = placeList.places.size();
-//                    int len = s>10 ? s : s;    //Limiting to a maximum of 10 right now
-                    for (int i = 1; i < s; i++) {
-                        SinglePlace place = placeList.places.get(i);
-                        Log.d(TAG, "hospital 1" + place.getName());
+                        int s = placeList.places.size();
+    //                    int len = s>10 ? s : s;    //Limiting to a maximum of 10 right now
+                        for (int i = 1; i < s; i++) {
+                            SinglePlace place = placeList.places.get(i);
+                            Log.d(TAG, "hospital 1" + place.getName());
 
-//                        addMapMarker(place.getLoc(), place.getName(), place.getVicinity());
+    //                        addMapMarker(place.getLoc(), place.getName(), place.getVicinity());
+                        }
+
+                        getDistance();
+                    } else {
+                        // Display message for lack of results.
+                        Toast.makeText(ctx, "No results found in a 5km radius.", Toast.LENGTH_SHORT).show();
                     }
 
-                    getDistance();
-                } else {
-                    // Display message for lack of results.
-                    Toast.makeText(ctx, "No results found in a 5km radius.", Toast.LENGTH_SHORT).show();
+    //                addMapMarker(new LatLng(28.6566,77.18432),"Test loc","testing");
+    //                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(curLocation, 14));
+
+    //                mapReady = true;
+    //                curmarker.showInfoWindow();
+                    stopLoadingAnimation();
+                    Log.d(TAG, "onResponse: Fininshed adding location pointers");
                 }
 
-//                addMapMarker(new LatLng(28.6566,77.18432),"Test loc","testing");
-//                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(curLocation, 14));
-
-//                mapReady = true;
-//                curmarker.showInfoWindow();
-                stopLoadingAnimation();
-                Log.d(TAG, "onResponse: Fininshed adding location pointers");
-            }
-
-            @Override
-            public void onFailure(Call<PlaceList> call, Throwable t) {
-                Log.d(TAG, "onFailure: cannot access places api");
-                Toast.makeText(ctx, "Unable to access server. Please try again later", Toast.LENGTH_SHORT).show();
-            }
-        });
+                @Override
+                public void onFailure(Call<PlaceList> call, Throwable t) {
+                    Log.d(TAG, "onFailure: cannot access places api");
+                    Toast.makeText(ctx, "Unable to access server. Please try again later", Toast.LENGTH_SHORT).show();
+                }
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     void showDetailList() {
@@ -358,9 +367,13 @@ public class RestaurantLocation extends AppCompatActivity  {
         String destination = "";
 
 
-        for (int i = 0; i < placeList.places.size() - 1; i++) {
-            SinglePlace place = placeList.places.get(i);
-            destination += place.getLoc().latitude + "," + place.getLoc().longitude + "|";
+        try {
+            for (int i = 0; i < placeList.places.size() - 1; i++) {
+                SinglePlace place = placeList.places.get(i);
+                destination += place.getLoc().latitude + "," + place.getLoc().longitude + "|";
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         SinglePlace place = placeList.places.get(placeList.places.size() - 1);
         destination += place.getLoc().latitude + "," + place.getLoc().longitude;
@@ -371,39 +384,43 @@ public class RestaurantLocation extends AppCompatActivity  {
         params.put("origins", curLocation.latitude + "," + curLocation.longitude);
         params.put("destinations", destination);
 
-        restaurantListClient.getRestaurantDistances(params).enqueue(new Callback<DistanceResult>() {
-            @Override
-            public void onResponse(Call<DistanceResult> call, Response<DistanceResult> response) {
-                distanceResult = response.body();
+        try {
+            restaurantListClient.getRestaurantDistances(params).enqueue(new Callback<DistanceResult>() {
+                @Override
+                public void onResponse(Call<DistanceResult> call, Response<DistanceResult> response) {
+                    distanceResult = response.body();
 
-                if (distanceResult != null) {
-                    ArrayList<DistanceDuration> distanceDurations = distanceResult.getRows().get(0).getElements();
+                    if (distanceResult != null) {
+                        ArrayList<DistanceDuration> distanceDurations = distanceResult.getRows().get(0).getElements();
 
-                    if (distanceDurations == null)
-                        return;
+                        if (distanceDurations == null)
+                            return;
 
-                    for (int i = 0; i < distanceDurations.size(); i++) {
-                        DistanceDuration d = distanceDurations.get(i);
+                        for (int i = 0; i < distanceDurations.size(); i++) {
+                            DistanceDuration d = distanceDurations.get(i);
 
-//                        Log.d(TAG, "onResponse: distance"+d.getDistance().getText());
-//                        Log.d(TAG, "onResponse: duration"+d.getDuration().getText());
+    //                        Log.d(TAG, "onResponse: distance"+d.getDistance().getText());
+    //                        Log.d(TAG, "onResponse: duration"+d.getDuration().getText());
 
-                        placeList.places.get(i).setDistance(d.getDistance().getValue());
-                        placeList.places.get(i).setDistanceString(d.getDistance().getText());
-                        placeList.places.get(i).setTimeMinutes(d.getDuration().getValue());
-                        placeList.places.get(i).setTimeString(d.getDuration().getText());
+                            placeList.places.get(i).setDistance(d.getDistance().getValue());
+                            placeList.places.get(i).setDistanceString(d.getDistance().getText());
+                            placeList.places.get(i).setTimeMinutes(d.getDuration().getValue());
+                            placeList.places.get(i).setTimeString(d.getDuration().getText());
+                        }
+                    } else {
+                        Toast.makeText(ctx, "Unable to fetch data from the server. Please try again later", Toast.LENGTH_SHORT).show();
                     }
-                } else {
-                    Toast.makeText(ctx, "Unable to fetch data from the server. Please try again later", Toast.LENGTH_SHORT).show();
                 }
-            }
 
-            @Override
-            public void onFailure(Call<DistanceResult> call, Throwable t) {
-                Toast.makeText(ctx, "Unable to access server. Please try again later", Toast.LENGTH_SHORT).show();
-//                Log.d(TAG, "onFailure: cannot fetch distances");
-            }
-        });
+                @Override
+                public void onFailure(Call<DistanceResult> call, Throwable t) {
+                    Toast.makeText(ctx, "Unable to access server. Please try again later", Toast.LENGTH_SHORT).show();
+    //                Log.d(TAG, "onFailure: cannot fetch distances");
+                }
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     void showOptionDialog() {

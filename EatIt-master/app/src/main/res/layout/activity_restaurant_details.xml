@@ -160,8 +160,6 @@
                 android:textColor="@android:color/black"
                 android:textSize="16sp" />
 
-        </LinearLayout>
-    </ScrollView>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -191,4 +189,8 @@
             android:text="Call"
             android:textColor="@android:color/white" />
     </LinearLayout>
+        </LinearLayout>
+
+    </ScrollView>
+
 </FrameLayout>

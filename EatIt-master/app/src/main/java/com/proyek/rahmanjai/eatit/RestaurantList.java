@@ -41,7 +41,6 @@ public class RestaurantList extends AppCompatActivity {
     TextView tvDisplayResult;
     GooglePlacesApi googlePlacesApi;
     RestaurantListClient hospitalListClient;
-    private Button loginPage,locateMap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

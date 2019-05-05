@@ -63,11 +63,11 @@ public class SignIn extends AppCompatActivity {
         users.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                if (dataSnapshot.child(localPhone).exists())
+                if (dataSnapshot.child(edtPhone.getText().toString()).exists())
                 {
                     mDialog.dismiss();
-                    User user = dataSnapshot.child(localPhone).getValue(User.class);
-                    user.setPhone(localPhone);
+                    User user = dataSnapshot.child(edtPhone.getText().toString()).getValue(User.class);
+                    user.setPhone(edtPhone.getText().toString());
                     if (Boolean.parseBoolean(user.getIsStaff())) // If isStaff == true
                     {
                         if (user.getPassword().equals(localPassword))

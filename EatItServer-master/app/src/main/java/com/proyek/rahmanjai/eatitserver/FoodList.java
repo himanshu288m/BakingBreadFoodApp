@@ -320,7 +320,7 @@ public class FoodList extends AppCompatActivity {
 
                 Snackbar.make(food_list_layout, "\n" + "Food Data "+ item.getName()+"Changed", Snackbar.LENGTH_SHORT)
                         .show();
-                }
+            }
         });
         alertDialog.setNegativeButton("NO", new DialogInterface.OnClickListener() {
             @Override

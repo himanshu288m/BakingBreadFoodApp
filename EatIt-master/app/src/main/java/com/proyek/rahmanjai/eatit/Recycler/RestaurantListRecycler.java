@@ -10,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.proyek.rahmanjai.eatit.Model.SinglePlace;
@@ -55,6 +56,7 @@ public class RestaurantListRecycler extends RecyclerView.Adapter<RestaurantListR
         holder.tvAddress.setText(address);
         holder.tvDistance.setText(currentItem.getDistanceString());
         holder.tvTime.setText(currentItem.getTimeString());
+        holder.imageView.setImageResource(R.drawable.scooter);
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,6 +77,7 @@ public class RestaurantListRecycler extends RecyclerView.Adapter<RestaurantListR
 
     public class ListHolder extends RecyclerView.ViewHolder {
         TextView tvName, tvAddress, tvIcon, tvTime, tvDistance;
+        ImageView imageView;
         View itemView;
 
         public ListHolder(View itemView) {
@@ -86,6 +89,7 @@ public class RestaurantListRecycler extends RecyclerView.Adapter<RestaurantListR
             tvIcon = (TextView) itemView.findViewById(R.id.tvIcon);
             tvTime = (TextView) itemView.findViewById(R.id.tvTime);
             tvDistance = (TextView) itemView.findViewById(R.id.tvDistance);
+            imageView = itemView.findViewById(R.id.restaurantImage);
         }
     }
 }

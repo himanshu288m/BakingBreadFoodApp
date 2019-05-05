@@ -2,6 +2,8 @@ package com.proyek.rahmanjai.eatitserver;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Window;
+import android.view.WindowManager;
 
 import com.codemybrainsout.onboarder.AhoyOnboarderActivity;
 import com.codemybrainsout.onboarder.AhoyOnboarderCard;
@@ -14,6 +16,9 @@ public  class OnBoardingActivity extends AhoyOnboarderActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
         super.onCreate(savedInstanceState);
 
 
@@ -54,21 +59,21 @@ public  class OnBoardingActivity extends AhoyOnboarderActivity {
             ahoyOnboarderCard1.setDescriptionColor(R.color.black);
             ahoyOnboarderCard1.setTitleTextSize(dpToPixels(20, this));
             ahoyOnboarderCard1.setDescriptionTextSize(dpToPixels(10, this));
-            ahoyOnboarderCard1.setIconLayoutParams(142, 142, 308, 135,130,330);
+            ahoyOnboarderCard1.setIconLayoutParams(200, 200, 308, 135,130,330);
 
 
         ahoyOnboarderCard2.setTitleColor(R.color.black);
         ahoyOnboarderCard2.setDescriptionColor(R.color.black);
         ahoyOnboarderCard2.setTitleTextSize(dpToPixels(20, this));
         ahoyOnboarderCard2.setDescriptionTextSize(dpToPixels(10, this));
-        ahoyOnboarderCard2.setIconLayoutParams(140, 140, 280, 136,130,330);
+        ahoyOnboarderCard2.setIconLayoutParams(200, 200, 280, 136,130,330);
 
 
         ahoyOnboarderCard3.setTitleColor(R.color.black);
         ahoyOnboarderCard3.setDescriptionColor(R.color.black);
         ahoyOnboarderCard3.setTitleTextSize(dpToPixels(20, this));
         ahoyOnboarderCard3.setDescriptionTextSize(dpToPixels(10, this));
-        ahoyOnboarderCard3.setIconLayoutParams(140, 140, 280, 134,130,330);
+        ahoyOnboarderCard3.setIconLayoutParams(200, 200, 280, 134,130,330);
 
 
 

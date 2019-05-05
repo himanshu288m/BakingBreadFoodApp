@@ -49,7 +49,10 @@ public class SignUp extends AppCompatActivity {
     String ImageUrl ;
     private final int PICK_IMAGE_REQUEST = 71;
     ProgressDialog progressDialog;
-
+    FirebaseDatabase database = FirebaseDatabase.getInstance();
+    DatabaseReference myRootRef = database.getReference();
+    DatabaseReference restaurantRef = myRootRef.child("Restaurants");
+    DatabaseReference table_user = myRootRef.child("user");
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,8 +69,7 @@ public class SignUp extends AppCompatActivity {
         btnSelect = findViewById(R.id.btnSelect);
         btnnupload = findViewById(R.id.btnnupload);
         // Init Firebase
-        final FirebaseDatabase database = FirebaseDatabase.getInstance();
-        final DatabaseReference table_user = database.getReference("user");
+
 
         btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -78,52 +80,13 @@ public class SignUp extends AppCompatActivity {
                 if (Common.isConnectedToInternet(getBaseContext())) {
 
 
+                    User user = new User(edtName.getText().toString(),edtPhone.getText().toString(),edtRestaurantName.getText().toString(),ImageUrl);
+                    User user1 = new User(edtName.getText().toString(), edtPassword.getText().toString(),edtPhone.getText().toString());
 
-                    final ProgressDialog mDialog = new ProgressDialog(SignUp.this);
-                    mDialog.setMessage("\n" +
-                            "Please wait...");
-                    mDialog.show();
-
-                    table_user.addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(DataSnapshot dataSnapshot) {
-                            // Cek apakah Nomot telepon telah terdaftar
-                            if (dataSnapshot.child(edtPhone.getText().toString()).exists()) {
-                                mDialog.dismiss();
-                                Toast.makeText(SignUp.this, "Phone Number Registered !!", Toast.LENGTH_SHORT);
-                            } else {
-                                mDialog.dismiss();
-                                User user = new User(edtName.getText().toString(), edtPassword.getText().toString(),edtPhone.getText().toString());                                table_user.child(edtPhone.getText().toString()).setValue(user);
-                                table_user.child(edtPhone.getText().toString()).setValue(user);
-                                Toast.makeText(SignUp.this, "Signup Successful !!", Toast.LENGTH_SHORT);
-                                                            }
-                        }
-
-
-
-                        @Override
-                        public void onCancelled(DatabaseError databaseError) {
-
-                        }
-                    }
-
-                    );
-
-                    database.getReference("Restaurants").addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
-                            User user = new User(edtName.getText().toString(),edtPhone.getText().toString(),edtRestaurantName.getText().toString(),ImageUrl);
-                            database.getReference("Restaurants").child(edtPhone.getText().toString()).setValue(user);
+                    restaurantRef.child(edtPhone.getText().toString()).setValue(user);
+                            table_user.child(edtPhone.getText().toString()).setValue(user1);
                             Toast.makeText(SignUp.this, "Signup Successful !!", Toast.LENGTH_SHORT);
                             finish();
-                        }
-
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                        }
-                    });
 
                 }else {
                     Toast.makeText(SignUp.this, "Please check your internet connection!", Toast.LENGTH_SHORT).show();
